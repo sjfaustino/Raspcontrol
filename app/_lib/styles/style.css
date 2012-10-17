@@ -234,10 +234,13 @@ h2 {
     font-family: Arial;
 }
 
-.firstBlockWrapper {
+.versionCheckContainer {
+	padding-top: 25px;
+}
+
+.firstBlockWrapper, .versionCheckContainer {
     margin: auto;
     width: 900px;
-    padding-top: 25px;
 }
 
 .cpuIcon {
@@ -614,3 +617,7 @@ h2 {
         position: absolute;
         left: 1em;
     }
+	
+a:visited {
+	color:blue;
+}

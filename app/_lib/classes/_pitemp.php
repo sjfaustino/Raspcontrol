@@ -4,7 +4,7 @@
 			return(round($celsius * 9 / 5 + 32));
 		}
 
-		function getCurrentTemp(){
+		function getCurrentTemp($statsOnly){
 			$maxtemp = 85;
 
 			$fh = fopen("/sys/class/thermal/thermal_zone0/temp", 'r');
@@ -13,7 +13,10 @@
 
 			$degrees_c = round($currenttemp / 1000);
 			$percentage = round($degrees_c / $maxtemp * 100);
-			
+			if ($statsOnly) {
+				echo '"' . $degrees_c . '"';
+				return;
+			}
 			if($percentage >= '80'){
 			    $warning = "<img src=\"_lib/images/danger.png\" height=\"18\" />";
 			    $bar = "barRed";

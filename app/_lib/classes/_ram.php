@@ -1,6 +1,6 @@
 <?php
 	class ramPercentage {
-		function freeMemory(){
+		function freeMemory($statsOnly){
 		    exec('free -mo', $out);
 		    preg_match_all('/\s+([0-9]+)/', $out[1], $matches);
 		    list($total, $used, $free, $shared, $buffers, $cached) = $matches[1];
@@ -14,6 +14,15 @@
 	            $warning = "<img src=\"_lib/images/ok.png\" height=\"18\" />";
 	            $bar = "barGreen";
 	          } 
+			  if ($statsOnly) {
+				echo '"ram" : {
+					"free" : '.($free + $buffers + $cached).',
+					"used" : '.($used - $buffers - $cached).',
+					"total" : '.$total.'
+				}';
+				//echo '{"free" : '.($free+$buffers+$cached).'}';
+				return;
+			  }
 	          ?>
 		
 		
@@ -46,7 +55,7 @@
 	<?php
 		}
 
-		function freeSwap(){
+		function freeSwap($statsOnly){
 		    exec('free -mo', $out);
 		    preg_match_all('/\s+([0-9]+)/', $out[2], $matches);
 		    list($total, $used, $free) = $matches[1];
@@ -60,6 +69,14 @@
 	            $warning = "<img src=\"_lib/images/ok.png\" height=\"18\" />";
 	            $bar = "barGreen";
 	          } 
+			  if ($statsOnly) {
+				echo '"swap" : {
+					"free" : '.$free.',
+					"used" : '.$used.',
+					"total" : '.$total.'
+				}';
+				return;
+			  }
 	          ?>
 		
 		

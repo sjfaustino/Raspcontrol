@@ -15,7 +15,7 @@ function networkUsage() {
  * */
 
 class network{
-	function networkUsage() {
+	function networkUsage($statsOnly) {
 	
 	$netType = shell_exec("sudo ifconfig");
 	$netTypeRaw = explode(" ", $netType); 
@@ -39,6 +39,15 @@ class network{
 		$iTotalConnections = shell_exec("netstat -nta --inet | wc -l");
 		$iTotalConnections--;
 		
+	if ($statsOnly) {
+		echo '"'.$netTypeFormatted[7].'" : {
+			"reveived" : "'.$rx.'MB",
+			"sent" : "'.$tx.'MB",
+			"total" : "'.$totalRxTx.'MB",
+			"active" : "'.substr($iTotalConnections, 0, -1).'"
+		}';
+		return;
+	}
 	?>
 
 	
