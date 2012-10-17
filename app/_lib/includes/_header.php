@@ -16,23 +16,9 @@ else
 <html>
 <head>
     <title>Raspcontrol - The Raspberry Pi Control Centre</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="_lib/styles/style.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="_lib/styles/menu.css" type="text/css" media="screen" charset="utf-8">
-    
-    <script type="text/javascript">
-	
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-33662683-1']);
-	  _gaq.push(['_trackPageview']);
-	
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	
-	</script>
-
 </head>
 
 <body>
@@ -42,9 +28,7 @@ else
                <h1><img src="_lib/images/smallLogo.png" style="float: left; margin-top: -15px;"> Raspcontrol.</h1>
 
                 <h2>The Raspberry Pi Control Centre</h2>
-                <br/>
-                <a href="https://twitter.com/Raspcontrol" class="twitter-follow-button" data-show-count="false">Follow @Raspcontrol</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
+
             </div>
 
 			<?php

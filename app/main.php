@@ -16,12 +16,12 @@ if($_SESSION['username'] == ""){
 	require('_lib/classes/_versionCheck.php'); 
             
 ?>
-
+	<div class="versionCheckContainer">
+		<?php $versionCheck = new versionCheck; $checkVersion = $versionCheck->checkVersion(); ?>
+	</div>
     <div id="firstBlockContainer">
+		
         <div class="firstBlockWrapper">
-        	
-        	<?php $versionCheck = new versionCheck; $checkVersion = $versionCheck->checkVersion(); ?>
-
 			<?php $uptime = new systemUptime; $getSystemUptime = $uptime->getSystemUptime();?>
         	
         	<div class="clear"></div>
@@ -81,5 +81,48 @@ if($_SESSION['username'] == ""){
 		alert("Firmware updating")
 		window.location = "_lib/commands/_updatefirmware.php";
 	}
+	
+	var poll = {
+		"start" : function () {
+			this.timer = setInterval("poll.update()", this.delay);
+		},
+		"stop" : function () {	
+			clearInterval(this.timer);
+		},
+		"update" : function (reset) {
+			if (reset) {
+				this.stop();
+				this.start();
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange=function() {
+				if (xhr.readyState==4 && xhr.status==200) {
+					poll.success(xhr.responseText);
+				}
+			}
+			xhr.open("get", '_lib/AJAX/update.php');
+			xhr.send();
+		},
+		"success" : function (data) {
+			var container = document.getElementById("firstBlockContainer");
+			var updateLog = document.getElementById("lastAJAXUpdate");
+			var d = new Date();
+			var time = d.toLocaleTimeString();
+			container.innerHTML = data;
+			updateLog.innerHTML = time + " (local time)";
+		},
+		"error" : function () {
+			this.stop();
+			alert("Error updating!");
+		},
+		"adjustDelay" : function (delay) {
+			this.stop();
+			this.delay = parseInt(delay);
+			this.start();
+		},
+		"delay" : 60000,
+		"timer" : 0
+	}
+	poll.start();
 	//-->
 	</script>

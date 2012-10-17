@@ -1,9 +1,11 @@
 <?php
 class usersLoggedIn{
-	function getusersLoggedIn() {
+	function getusersLoggedIn($statsOnly) {
 
 	$whoUsersType = shell_exec("who");	
-	$whoUsersFormatted = str_replace(" ", " &middot ", $whoUsersType);	?>
+	$whoUsersFormatted = str_replace(" ", " &middot ", $whoUsersType);	
+	if (!$statsOnly) {
+	?>
 
 	
 	
@@ -17,11 +19,18 @@ class usersLoggedIn{
 		  
 		  <div class="userText">
 		  	<div style="width: 500px">
-		  	<?php if($whoUsersFormatted == ""){
-		  		echo "<strong>No users logged in</strong>";
+		  	<?php }
+				if($whoUsersFormatted == ""){
+					if ($statsOnly) {
+						echo '"[]"';
+						return;
+					}
+					echo "<strong>No users logged in</strong>";
 		  	}else{
 		  		$s = "";
-				
+				if ($statsOnly) {
+					echo '[';
+				}
 				//Split lines into individual array elements
 				$lines = explode ("\n", $whoUsersType);
 				foreach ($lines as $line)
@@ -34,13 +43,24 @@ class usersLoggedIn{
 
 						//Now split fields into multiple values
 						$fields = explode(" ", $line);
-					
+						if ($statsOnly) {
+							echo '{
+								"user" : "'.$fields[0].'",
+								"ip" : "'.$fields[5].'",
+								"since" : "'.$fields[4].'"
+							}';
+							continue;
+						}
 						$s .= "<div style='float: left; padding-bottom: 30px; padding-right: 20px;'><strong>User:</strong> " . $fields[0] . "<br />";
 						$s .= "<strong>IP From:</strong> " . $fields[5] . "<br />";
 						$s .= "<strong>Since:</strong> " . $fields[4] . "</div>";
 
 						$s .= "";
 					}
+				}
+				if ($statsOnly) {
+					echo ']';
+					return;
 				}
 				echo $s;
 		  	}

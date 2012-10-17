@@ -70,7 +70,6 @@ if(isset($_POST['setup']))
 
 		require('_lib/includes/_header.php');
 		require('_lib/classes/_login.php'); 
-                echo("Loggedin".$wrong);
 ?>
 
 	    <div id="firstBlockContainer">

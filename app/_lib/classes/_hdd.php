@@ -1,7 +1,8 @@
 <?php
 	class hddPercentage {
-		function freeStorage(){
+		function freeStorage($statsOnly){
 			exec('df -hT | grep -vE "tmpfs|rootfs|Filesystem"', $drivesarray);
+			if (!$statsOnly) {
 			?>
 				<div class="sdIcon">
 					<img src="_lib/images/sd.png" align="middle"> 
@@ -13,13 +14,33 @@
 				
 				<br/><br/><br/><br/><br/>
 			<?php
-
+			}
+			if ($statsOnly) {
+				echo '[';
+			}
 			for ($drive=0; $drive<count($drivesarray); $drive++) 
 			{
 				$drivesarray[$drive] = preg_replace('!\s+!', ' ', $drivesarray[$drive]);
 				preg_match_all('/\S+/', $drivesarray[$drive], $drivedetails);
 				list($fs, $type, $size, $used, $available, $percentage, $mounted) = $drivedetails[0];
-
+				
+				if ($statsOnly) {
+					echo '{
+						"mount" : "'.$mounted.'",
+						"total" : "'.$size.'B",
+						"free" : "'.$available.'B",
+						"format" : "'.$type.'"
+					}';
+					$check = $drive-1;
+					if ($check < (count($drivesarray)-2)) {
+						echo ',';
+					}
+					if ($check == (count($drivesarray)-2)) {
+						echo ']';
+					}
+					continue;
+				}
+				
 				if(rtrim($percentage, '%') > '80'){
 			    $warning = "<img src=\"_lib/images/warning.png\" height=\"18\" />";
 			    $bar = "barAmber";
@@ -49,7 +70,7 @@
 				
 				Total: <strong><?php echo $size ?>B</strong> &middot
 				Free: <strong><?php echo $available ?>B</strong> &middot		
-				Format: <strong><?php echo $type ?>B</strong>
+				Format: <strong><?php echo $type ?></strong>
 				</div>
 						
 				<div class="clear"></div>

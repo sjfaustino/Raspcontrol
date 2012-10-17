@@ -1,10 +1,14 @@
 <?php
 	class systemUptime {
-		function getSystemUptime(){
+		function getSystemUptime($statsOnly){
 		
 		 	$uptime = shell_exec("cat /proc/uptime");
 			$uptime = explode(" ", $uptime);          
 		        $uptime = $this->secondsToReadableTime($uptime[0]);
+				if ($statsOnly) {
+					echo '"'.$uptime.'"';
+					return;
+				}
 				?>
 				
 					<div class="uptimeIcon">

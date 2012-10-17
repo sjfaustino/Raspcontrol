@@ -1,7 +1,6 @@
 <?php
 	class cpuLoad {
-		function getCpuLoad(){
-
+		function getCpuLoad($statsOnly){
 		  $getLoad = sys_getloadavg();
 
 		  $cpuCurFreq = round(file_get_contents("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq") / 1000) . "MHz";
@@ -14,6 +13,20 @@
           } else {
               $warning = "<img src=\"_lib/images/ok.png\" height=\"18\" />";
           }
+		  
+		  if ($statsOnly) {
+			$heat = new heatPercentage;
+			echo '{
+				"loads" : ['.$getLoad[0].','.$getLoad[1].','.$getLoad[2].'],
+				"curFreq" : "'.$cpuCurFreq.'",
+				"minFreq" : "'.$cpuMinFreq.'",
+				"maxFreq" : "'.$cpuMaxFreq.'",
+				"freqGovernor" : "'.substr($cpuFreqGovernor, 0, -1).'",
+				"temp" : ';
+				$heatpercent = $heat->getCurrentTemp(true);
+			echo '}';
+			return;
+		  }
           ?>
 
 		  <div class="cpuIcon">
