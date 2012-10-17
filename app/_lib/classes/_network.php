@@ -1,7 +1,7 @@
 <?php
 /*
 function networkUsage() {
-    $string = exec("sudo ifconfig eth0 | grep RX\ bytes", $out);
+    $string = exec("ifconfig eth0 | grep RX\ bytes", $out);
     $string = str_ireplace("RX bytes:", "", $string);
     $string = str_ireplace("TX bytes:", "", $string);
     $string = trim($string);
@@ -15,14 +15,14 @@ function networkUsage() {
  * */
 
 class network{
-	function networkUsage($statsOnly) {
+	function networkUsage($statsOnly = 0) {
 	
-	$netType = shell_exec("sudo ifconfig");
+	$netType = shell_exec("ifconfig");
 	$netTypeRaw = explode(" ", $netType); 
 	$netTypeFormatted = str_replace("encap:", "", $netTypeRaw);
 	
 	
-    $dataThroughput = exec("sudo ifconfig eth0 | grep RX\ bytes", $out);
+    $dataThroughput = exec("ifconfig wlan0 | grep RX\ bytes", $out);
     $dataThroughput = str_ireplace("RX bytes:", "", $dataThroughput);
     $dataThroughput = str_ireplace("TX bytes:", "", $dataThroughput);
     $dataThroughput = trim($dataThroughput);
@@ -41,7 +41,7 @@ class network{
 		
 	if ($statsOnly) {
 		echo '"'.$netTypeFormatted[7].'" : {
-			"reveived" : "'.$rx.'MB",
+			"received" : "'.$rx.'MB",
 			"sent" : "'.$tx.'MB",
 			"total" : "'.$totalRxTx.'MB",
 			"active" : "'.substr($iTotalConnections, 0, -1).'"
@@ -57,7 +57,7 @@ class network{
 		  </div> 
 		  
 		  <div class="networkTitle">
-		  	Network <?php echo $warning ?>
+		  	Network
 		  </div>
 		  
 		  <div class="networkText">

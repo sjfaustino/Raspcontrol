@@ -101,12 +101,12 @@ $swap = "Swap: " . $percentage . "%" . "\n" . "Free: " . $free . " MB" . "\n" . 
 $hdd = "SD Card: " . $percentage . "%" . "\n" . "Free: " . $free . "GB" . "\n" . "Used: " . $used . "GB" . "\n" . "Total: " . $total . "GB";
 
 
-	$netType = shell_exec("sudo ifconfig");
+	$netType = shell_exec("ifconfig");
 	$netTypeRaw = explode(" ", $netType); 
 	$netTypeFormatted = str_replace("encap:", "", $netTypeRaw);
 	
 	
-    $dataThroughput = exec("sudo ifconfig eth0 | grep RX\ bytes", $out);
+    $dataThroughput = exec("ifconfig wlan0 | grep RX\ bytes", $out);
     $dataThroughput = str_ireplace("RX bytes:", "", $dataThroughput);
     $dataThroughput = str_ireplace("TX bytes:", "", $dataThroughput);
     $dataThroughput = trim($dataThroughput);
@@ -122,7 +122,7 @@ $hdd = "SD Card: " . $percentage . "%" . "\n" . "Free: " . $free . "GB" . "\n" .
 
 $network = "Ethernet:\n" . "Received: " . $rx . "MB" . "\n" . "Sent: " . $tx . "MB" . "\n" . "Total: " . $totalRxTx . "MB";
                   
-$whoUsersType = shell_exec("sudo users");	
+$whoUsersType = shell_exec("users");	
 	$whoUsersFormatted = str_replace(" ", "\n", $whoUsersType);
 
 $users = "Active Users:" . "\n" . $whoUsersFormatted;

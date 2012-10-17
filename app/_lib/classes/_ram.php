@@ -1,6 +1,6 @@
 <?php
 	class ramPercentage {
-		function freeMemory($statsOnly){
+		function freeMemory($statsOnly = 0){
 		    exec('free -mo', $out);
 		    preg_match_all('/\s+([0-9]+)/', $out[1], $matches);
 		    list($total, $used, $free, $shared, $buffers, $cached) = $matches[1];
@@ -55,7 +55,7 @@
 	<?php
 		}
 
-		function freeSwap($statsOnly){
+		function freeSwap($statsOnly = 0){
 		    exec('free -mo', $out);
 		    preg_match_all('/\s+([0-9]+)/', $out[2], $matches);
 		    list($total, $used, $free) = $matches[1];

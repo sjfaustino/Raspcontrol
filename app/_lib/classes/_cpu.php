@@ -1,6 +1,6 @@
 <?php
 	class cpuLoad {
-		function getCpuLoad($statsOnly){
+		function getCpuLoad($statsOnly = 0){
 		  $getLoad = sys_getloadavg();
 
 		  $cpuCurFreq = round(file_get_contents("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq") / 1000) . "MHz";

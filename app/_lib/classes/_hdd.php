@@ -1,6 +1,6 @@
 <?php
 	class hddPercentage {
-		function freeStorage($statsOnly){
+		function freeStorage($statsOnly = 0){
 			exec('df -hT | grep -vE "tmpfs|rootfs|Filesystem"', $drivesarray);
 			if (!$statsOnly) {
 			?>

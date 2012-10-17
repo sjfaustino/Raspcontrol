@@ -1,6 +1,6 @@
 <?php
 	class systemUptime {
-		function getSystemUptime($statsOnly){
+		function getSystemUptime($statsOnly = 0){
 		
 		 	$uptime = shell_exec("cat /proc/uptime");
 			$uptime = explode(" ", $uptime);          

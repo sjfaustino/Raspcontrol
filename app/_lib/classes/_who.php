@@ -1,6 +1,6 @@
 <?php
 class usersLoggedIn{
-	function getusersLoggedIn($statsOnly) {
+	function getusersLoggedIn($statsOnly = 0) {
 
 	$whoUsersType = shell_exec("who");	
 	$whoUsersFormatted = str_replace(" ", " &middot ", $whoUsersType);	

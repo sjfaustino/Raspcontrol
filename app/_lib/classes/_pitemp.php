@@ -4,7 +4,7 @@
 			return(round($celsius * 9 / 5 + 32));
 		}
 
-		function getCurrentTemp($statsOnly){
+		function getCurrentTemp($statsOnly = 0){
 			$maxtemp = 85;
 
 			$fh = fopen("/sys/class/thermal/thermal_zone0/temp", 'r');

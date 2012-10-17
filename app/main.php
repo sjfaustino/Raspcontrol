@@ -17,7 +17,7 @@ if($_SESSION['username'] == ""){
             
 ?>
 	<div class="versionCheckContainer">
-		<?php $versionCheck = new versionCheck; $checkVersion = $versionCheck->checkVersion(); ?>
+		<?php //$versionCheck = new versionCheck; $checkVersion = $versionCheck->checkVersion(); ?>
 	</div>
     <div id="firstBlockContainer">
 		
