@@ -42,6 +42,10 @@ else
 
 			      $kernel = exec("uname -mrs");
                               $firmware = exec("uname -v");
+
+                              $warranty = exec("cat /proc/cpuinfo | grep Revision");
+                              $warranty = str_ireplace('Revision	: ', '', $warranty);
+                              $warranty = ( strlen($warranty)==7 ? "void" : "valid");
 			?>
 
 				<div style="text-align: right; padding-top: 4px; color: #FFFFFF; font-family: Arial; font-size: 13px; float: right; width:500px;">
@@ -52,7 +56,8 @@ else
 		                <strong>HTTP:</strong> <?php echo $_SERVER['SERVER_SOFTWARE']; ?><br/><br/>
 		                <?php echo "<strong>Distribution:</strong> ".$distroTypeRawEnd; ?><br/>
 		                <?php echo "<strong>Kernel:</strong> ".$kernel; ?><br/>
-                        <?php echo "<strong>Firmware:</strong> ".$firmware; ?>
+                        <?php echo "<strong>Firmware:</strong> ".$firmware; ?><br/>
+                        <?php echo "<strong>Warranty:</strong> ".$warranty; ?>
 
 		            </div>
 
