@@ -30,6 +30,7 @@ class usersLoggedIn{
 		  		$s = "";
 				if ($statsOnly) {
 					echo '[';
+					$statsText = '';
 				}
 				//Split lines into individual array elements
 				$lines = explode ("\n", $whoUsersType);
@@ -44,11 +45,11 @@ class usersLoggedIn{
 						//Now split fields into multiple values
 						$fields = explode(" ", $line);
 						if ($statsOnly) {
-							echo '{
+							$statsText .= '{
 								"user" : "'.$fields[0].'",
 								"ip" : "'.$fields[5].'",
 								"since" : "'.$fields[4].'"
-							}';
+							},';
 							continue;
 						}
 						$s .= "<div style='float: left; padding-bottom: 30px; padding-right: 20px;'><strong>User:</strong> " . $fields[0] . "<br />";
@@ -59,6 +60,7 @@ class usersLoggedIn{
 					}
 				}
 				if ($statsOnly) {
+					echo substr($statsText, 0, -1);
 					echo ']';
 					return;
 				}

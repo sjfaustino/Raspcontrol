@@ -621,3 +621,11 @@ h2 {
 a:visited {
 	color:blue;
 }
+
+.warranty_void {
+	color:red;
+}
+
+.warranty_valid {
+	color:lime;
+}

@@ -1,5 +1,8 @@
 <?php
-	header('Content-type: application/json');
+	header("Access-Control-Allow-Origin: *");
+	header("Content-type: application/json");
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	require('../classes/_ram.php'); 
 	require('../classes/_pitemp.php'); 
 	require('../classes/_hdd.php'); 
